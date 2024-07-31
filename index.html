@@ -8,11 +8,27 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f8ff;
+            background: linear-gradient(135deg, #000000, #8e2de2); /* Black to purple gradient */
+            color: #fff;
+        }
+        .image-container {
+            text-align: center; /* Center align text and image */
+            margin-bottom: 20px; /* Space between image and container */
+        }
+        .image-container img {
+            width: 300px; /* Adjust width to make the image smaller */
+            height: auto;
+            border-radius: 10px;
+        }
+        .image-container p {
+            margin-top: 10px; /* Space between image and text */
+            font-size: 14px;
+            color: #fff;
         }
         .container {
             text-align: center;
@@ -20,6 +36,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
         }
         .container h1 {
             color: #333;
@@ -28,14 +46,14 @@
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            background-color: #007bff;
+            background-color: #0ABAB5;
             color: #fff;
             font-size: 16px;
             cursor: pointer;
-            margin: 5px;
+            margin: 30px; /* Increase margin for more space between buttons */
         }
         .container button:hover {
-            background-color: #0056b3;
+            background-color: #009a93;
         }
         #noBtn {
             position: relative;
@@ -43,6 +61,10 @@
     </style>
 </head>
 <body>
+    <div class="image-container">
+        <img src="samy.jpg" alt="Samy">
+        <p>This is how it feels trying to get your number</p>
+    </div>
     <div class="container">
         <h1>Can I have your number?</h1>
         <button id="yesBtn">Yes</button>
