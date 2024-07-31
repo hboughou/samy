@@ -50,7 +50,7 @@
             color: #fff;
             font-size: 16px;
             cursor: pointer;
-            margin: 10px;
+            margin: 30px;
         }
         .container button:hover {
             background-color: #009a93;
@@ -94,6 +94,8 @@
         const yesBtn = document.getElementById('yesBtn');
         const formContainer = document.getElementById('formContainer');
         const noBtn = document.getElementById('noBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const phoneNumberInput = document.getElementById('phoneNumber');
 
         yesBtn.addEventListener('click', function() {
             formContainer.style.display = 'block';
@@ -112,6 +114,32 @@
             noBtn.style.position = 'absolute';
             noBtn.style.left = `${randomX}px`;
             noBtn.style.top = `${randomY}px`;
+        });
+
+        submitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const phoneNumber = phoneNumberInput.value;
+            if (phoneNumber) {
+                fetch('/.netlify/functions/save-number', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ phoneNumber }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Thank you! Your number has been submitted.');
+                    phoneNumberInput.value = '';
+                    formContainer.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error submitting your number.');
+                });
+            } else {
+                alert('Please enter a number before submitting.');
+            }
         });
     </script>
 </body>
