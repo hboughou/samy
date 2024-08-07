@@ -1,10 +1,27 @@
-// netlify-functions/save-number.js
-exports.handler = async function(event, context) {
-    const phoneNumber = JSON.parse(event.body).phoneNumber;
-    // Replace this with your logic to save the number, e.g., save to a database or send an email
+exports.handler = async function(event) {
+    try {
+        const { phoneNumber } = JSON.parse(event.body);
+        console.log('Received phone number:', phoneNumber);
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify({ message: 'Success' })
-    };
+        if (!phoneNumber) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ message: 'Phone number is required' }),
+            };
+        }
+
+        // Log the received data (useful for debugging)
+        console.log('Phone number received:', phoneNumber);
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: 'Success' }),
+        };
+    } catch (error) {
+        console.error('Function error:', error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ message: 'Internal Server Error' }),
+        };
+    }
 };
